@@ -15,6 +15,6 @@ export const API = {
 };
 
 export const mailJet = {
-  apiKeyPrivate: process.env.MJ_APIKEY_PRIVATE || 'NA',
-  apiKeyPublic: process.env.MJ_APIKEY_PUBLIC || 'NA',
+  apiKeyPrivate: '67859e5295026552d70f866e16d5db36', // process.env.MJ_APIKEY_PRIVATE || "NA",
+  apiKeyPublic: 'e4d5e9c0574389cbebedcd53e7171def', //  process.env.MJ_APIKEY_PUBLIC || "NA"
 };
