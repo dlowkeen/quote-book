@@ -1,7 +1,3 @@
-# Summary
-
-This is Currency Capital's working starter template for fullstack react apps. It implements hot reloading, live typescript reloading, and basic server rendering out of the box.
-
 ## Built With
 
 - [React](https://reactjs.org/docs/hello-world.html) - Javascript Framework

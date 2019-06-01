@@ -6,6 +6,7 @@ import Login from '../Login';
 
 const Router: React.FunctionComponent = () => (
   <Switch>
+    <Route exact path='/login' component={Login} />
     <Route exact path='/demo/:id' component={DemoContainer} />
     <Route exact path='/login' component={Login} />
 
