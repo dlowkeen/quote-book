@@ -17,10 +17,6 @@ export async function send(req: express.Request, res: express.Response) {
             Email: 'lowkeendonovan@gmail.com',
             Name: 'Donovan Lowkeen',
           },
-          {
-            Email: 'sekaran.srinivaas@gmail.com',
-            Name: 'Srini Sekaran',
-          },
         ],
         From: {
           Email: 'technology.nudge@gmail.com',
