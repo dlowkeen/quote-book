@@ -3,6 +3,10 @@ import reactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
+import '../assets/scss/argon-dashboard-react.scss';
+import '../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css';
+import '../assets/vendor/nucleo/css/nucleo.css';
+
 import createProcessEnv from '../config/process';
 
 import App from '../components/App';

@@ -2,9 +2,11 @@ import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import { DemoContainer } from '../Demo';
+import Login from '../Login';
 
 const Router: React.FunctionComponent = () => (
   <Switch>
+    <Route exact path='/login' component={Login} />
     <Route exact path='/demo/:id' component={DemoContainer} />
 
     {/* Redirect insures we always have something sensible to render */}
