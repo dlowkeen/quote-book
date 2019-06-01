@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The Dollar component renders as expected 1`] = `
+<div
+  className="inputs__form-element__VT4Ts inputs__form-element-text__13VAX"
+>
+  <label>
+    label
+  </label>
+  <div
+    className="inputs__form-element-symbol__2lJmr"
+  >
+    $
+  </div>
+  <input
+    max="10"
+    min="0"
+    onChange={[Function]}
+    type="tel"
+    value="3"
+  />
+</div>
+`;

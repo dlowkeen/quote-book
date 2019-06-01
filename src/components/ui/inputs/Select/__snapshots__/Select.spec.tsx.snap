@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The Select component renders as expected 1`] = `
+<div
+  className="inputs__form-element__VT4Ts inputs__form-element-select___TUE5"
+>
+  <label>
+    label
+  </label>
+  <select
+    onChange={[Function]}
+    value="3"
+  >
+    <option
+      value="this"
+    >
+       
+      this
+       
+    </option>
+    <option
+      value="that"
+    >
+       
+      that
+       
+    </option>
+    <option
+      value="the other"
+    >
+       
+      the other
+       
+    </option>
+  </select>
+</div>
+`;

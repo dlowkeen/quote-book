@@ -1,0 +1,89 @@
+.tooltipWrap {
+  display: inline;
+}
+
+@media screen and getBreakpoint(bpPhablet) {
+  .tooltipWrap {
+    position: relative;
+  }
+}
+
+.tooltipIcon {
+  color: $colorGrey3;
+
+  svg {
+    width: 1.7rem;
+    height: 1.7rem;
+    transform: translate(0.5rem, -0.7rem);
+  }
+}
+
+/* styles for the actual tooltip element / popup, appended to the above parent element */
+.tooltip {
+  color: $colorTypeLight;
+  display: inline-block;
+  position: absolute;
+  top: 3rem;
+  left: 1rem;
+  min-width: 27rem;
+  z-index: 100;
+  background: $colorCurrencyBlue;
+  box-shadow: $uiBoxShadowDark;
+  border-radius: 4px;
+
+  /* font-size: $mds-1-a; */
+  padding: 1em;
+
+  /* triangle */
+  &::before {
+    content: '';
+    position: absolute;
+    top: -0.9rem;
+    left: 0;
+    border-right: 1rem solid transparent;
+    border-left: 1rem solid transparent;
+    border-bottom: 1rem solid $colorCurrencyBlue;
+  }
+
+  a {
+    color: $colorTypeLight;
+  }
+}
+
+@media screen and getBreakpoint(bpPhablet) {
+  .tooltip {
+    top: 0;
+    left: 2.5rem;
+    width: 1rem;
+
+    &::before {
+      top: 0.2rem;
+      left: -0.9rem;
+      border-top: 1rem solid transparent;
+      border-right: 1rem solid $colorCurrencyBlue;
+      border-bottom: 1rem solid transparent;
+      border-left: none;
+    }
+  }
+}
+
+.tooltip--content {
+  @mixin typesize -1;
+
+  ul {
+    padding-left: 1.5em;
+  }
+}
+
+.tooltip--close {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+
+  /* this is currently set on a button element, necessitates removing some browser-defaults */
+  appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+  color: $colorTypeLight;
+}

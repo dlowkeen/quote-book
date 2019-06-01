@@ -1,0 +1,118 @@
+@import 'typography-utils.css'; /* font size classes */
+@import url('https://use.typekit.net/qom5loh.css'); /* typekit */
+
+/**** basic font sizing defaults */
+h1 {
+  @mixin typesize 3;
+}
+h2 {
+  @mixin typesize 2;
+}
+h3 {
+  @mixin typesize 1;
+}
+h4,
+body {
+  @mixin typesize 0;
+}
+h5 {
+  @mixin typesize -1;
+}
+h6 {
+  @mixin typesize -2;
+}
+
+/**** vertical rhythm */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0 0 fontSize(0);
+}
+@media screen and getBreakpoint(bpPhablet) {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    margin: 0 0 fontSize(0, 2);
+  }
+}
+
+/* Basic Settings */
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: $baseFont;
+  line-height: 1.7;
+  color: $colorTypeDark;
+}
+
+/* headers */
+h1,
+h2,
+h3 {
+  font-family: $headerFont;
+  line-height: 1.3;
+}
+
+h1 {
+  color: $colorCurrencyNavy;
+}
+h4 {
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* text elements */
+p,
+span,
+li,
+td,
+input,
+textarea,
+label,
+address,
+code,
+pre,
+dt,
+dd,
+button {
+  font-family: inherit;
+}
+
+/* links */
+a {
+  color: $colorCurrencyGreen;
+  cursor: pointer;
+  font-size: inherit;
+  font-family: inherit;
+  &:visited {
+    /*color: lighten($colorExpressDarkblue, 0.2); TODO - lighten / darken color functions would be nice  */
+  }
+  &:hover {
+  }
+  &:active {
+  }
+}
+span {
+  font-size: inherit;
+}
+
+/* lists */
+ol {
+  ol {
+    list-style-type: lower-alpha;
+    ol {
+      list-style-type: lower-roman;
+    }
+  }
+}

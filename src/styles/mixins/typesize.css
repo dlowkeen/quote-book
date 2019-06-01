@@ -1,0 +1,6 @@
+@define-mixin typesize $degree {
+  font-size: fontSize($degree, 1);
+  @media screen and getBreakpoint(bpPhablet) {
+    font-size: fontSize($degree, 2);
+  }
+}

@@ -1,0 +1,40 @@
+/* Button Styles */
+
+/* TODO - mixin pattern so we only need a single button class? */
+.btn {
+  /* resets */
+  outline: none;
+  border: none;
+  background: none;
+  text-transform: none; /* only necessary for anchor buttons -- move to subclass if we split those off into a separate compontent */
+
+  /* shared button styles */
+  border-radius: $uiBorderRadius;
+  cursor: pointer;
+  letter-spacing: 1px;
+  min-width: 18rem;
+  padding: 0.5em 2em;
+}
+
+.btn--primary {
+  background: $colorCurrencyGreen;
+  border: 1px solid $colorCurrencyGreen;
+  color: $colorTypeLight;
+
+  &[disabled] {
+    cursor: default;
+    opacity: 0.5;
+  }
+}
+
+.btn--secondary {
+  background: transparent;
+  border: 1px solid $colorCurrencyGreen;
+  color: $colorCurrencyGreen;
+
+  &[disabled] {
+    border-color: $colorGrey2;
+    color: $colorGrey2;
+    cursor: default;
+  }
+}

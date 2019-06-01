@@ -1,0 +1,21 @@
+/* "global" styles, additional resets -- TODO - rename? "settings"? */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  /* TODO -- need to move this to a wrapper class or something, don't like styling body */
+  padding: 0 1em;
+}
+
+/* a few more resets */
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  cursor: pointer;
+}

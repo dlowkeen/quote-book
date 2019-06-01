@@ -1,0 +1,18 @@
+.dang {
+  color: red;
+  font-weight: bold;
+}
+
+.loading {
+  color: orange;
+  font-weight: bold;
+}
+
+.ok {
+  color: green;
+  font-weight: bold;
+}
+
+.refresh-button {
+  margin: 20px 10px;
+}

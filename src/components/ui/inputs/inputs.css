@@ -1,0 +1,60 @@
+@define-mixin form-element-base {
+  border: 1px solid $colorGrey1;
+  border-radius: $uiBorderRadius;
+  padding: 0.75rem 1rem;
+  transition: 0.15s ease-out border;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+    border: 1px solid $colorCurrencyBlue;
+  }
+}
+
+/* TODO - BEM got messed up below */
+
+.form-element {
+  margin-bottom: 1em;
+  position: relative;
+
+  label {
+    display: block;
+    font-weight: bold;
+    text-align: left;
+  }
+}
+
+.form-element-text {
+  input,
+  textarea {
+    @mixin form-element-base;
+  }
+
+  textarea {
+    min-height: 8rem;
+  }
+}
+
+.form-element-select {
+  select {
+    @mixin form-element-base;
+
+    background: white;
+    height: 4rem;
+  }
+}
+
+/* TODO -- port over custom "slider" styles from SCSS */
+
+.form-element-range {
+  input {
+    min-height: 3rem;
+    width: 100%;
+  }
+}
+
+.form-element-symbol {
+  position: absolute;
+  left: 0;
+  transform: translate(-1.3rem, 0.1rem);
+}

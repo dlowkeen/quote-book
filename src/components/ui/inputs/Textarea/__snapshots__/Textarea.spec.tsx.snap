@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The Textarea component renders as expected 1`] = `
+<div
+  className="inputs__form-element__VT4Ts inputs__form-element-text__13VAX"
+>
+  <label>
+    i have something i need to tell you
+  </label>
+  <textarea
+    name="george"
+    onChange={[Function]}
+  />
+</div>
+`;

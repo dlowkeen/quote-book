@@ -1,0 +1,61 @@
+/**** typographic scale */
+/* these are functional selectors meant to be @extend-ed by other classes - they are removed by postCSS during build */
+%alpha {
+  font-size: fontSize(3);
+}
+%beta {
+  font-size: fontSize(2);
+}
+%gamma {
+  font-size: fontSize(1);
+}
+%delta {
+  font-size: fontSize(0);
+}
+%epsilon {
+  font-size: fontSize(-1);
+}
+%zeta {
+  font-size: fontSize(-2);
+}
+
+@media screen and getBreakpoint(bpPhablet) {
+  %alpha {
+    font-size: fontSize(3, 2);
+  }
+  %beta {
+    font-size: fontSize(2, 2);
+  }
+  %gamma {
+    font-size: fontSize(1, 2);
+  }
+  %delta {
+    font-size: fontSize(0, 2);
+  }
+  %epsilon {
+    font-size: fontSize(-1, 2);
+  }
+  %zeta {
+    font-size: fontSize(-2, 2);
+  }
+}
+
+/**** font-sizing utility classes -- use sparingly! */
+:global(.alpha) {
+  @extend %alpha;
+}
+:global(.beta) {
+  @extend %beta;
+}
+:global(.gamma) {
+  @extend %gamma;
+}
+:global(.delta) {
+  @extend %delta;
+}
+:global(.epsilon) {
+  @extend %epsilon;
+}
+:global(.zeta) {
+  @extend %zeta;
+}

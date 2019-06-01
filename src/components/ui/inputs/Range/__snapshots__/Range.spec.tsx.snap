@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The Range component renders as expected 1`] = `
+<div
+  className="inputs__form-element__VT4Ts inputs__form-element-range__2ZDm_"
+>
+  <label>
+    label
+  </label>
+  <input
+    max="10"
+    min="0"
+    onChange={[Function]}
+    step="1"
+    type="range"
+    value="3"
+  />
+</div>
+`;

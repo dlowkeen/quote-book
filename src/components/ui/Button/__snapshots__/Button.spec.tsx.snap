@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The Button component renders as expected 1`] = `
+<button
+  className="styles__btn__1qKLL styles__btn--primary__1h19K"
+  onClick={[Function]}
+>
+  you know you wanna...
+</button>
+`;

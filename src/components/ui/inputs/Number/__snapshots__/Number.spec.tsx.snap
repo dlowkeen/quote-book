@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The Number component renders as expected 1`] = `
+<div
+  className="inputs__form-element__VT4Ts inputs__form-element-text__13VAX"
+>
+  <label>
+    label
+  </label>
+  <input
+    max="10"
+    min="0"
+    onChange={[Function]}
+    type="number"
+    value="3"
+  />
+</div>
+`;

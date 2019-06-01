@@ -1,0 +1,7 @@
+/* Global styles */
+
+/* This should remain minimal, we want to promote more modular / compontentized CSS authoring */
+
+@import 'normalize.css';
+@import 'global';
+@import 'typography';
