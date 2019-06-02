@@ -27,7 +27,7 @@ export async function get(req: express.Request, res: express.Response) {
     if (parseInt(qty, 0) === 1) {
       const totalQuotes = doc.quotes.length;
       const random = Math.floor(Math.random() * totalQuotes);
-      res.status(200).send({ quotes: doc.quotes[random], succes: true });
+      res.status(200).send({ quotes: [doc.quotes[random]], succes: true });
     } else {
       res.status(200).send({ quotes: doc.quotes, succes: true });
     }

@@ -17,7 +17,7 @@ const Router: React.FunctionComponent = () => (
     <Route exact path='/quote/random' component={QuoteRandom} />
 
     {/* Redirect insures we always have something sensible to render */}
-    <Redirect to='/demo/id' />
+    <Redirect to='/login' />
   </Switch>
 );
 
