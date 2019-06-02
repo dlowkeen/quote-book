@@ -39,7 +39,7 @@ export async function send(req: express.Request, res: express.Response) {
   requestJet
     .then((result: any) => {
       console.log(result.body);
-      res.status(200).send({ success: true });
+      res.status(200).send({ success: true, email });
     })
     .catch((err: Error) => {
       console.log(err);

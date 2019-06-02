@@ -9,7 +9,24 @@ export function validateEmail(email: string) {
   return re.test(String(email).toLowerCase());
 }
 
-class Login extends React.Component {
+interface ILoginProps {
+  errorMsg: string;
+  user: string;
+  userActions: any;
+  loadingUser: boolean;
+  match: {
+    params: {
+      id: string;
+    };
+  };
+}
+
+interface ILoginState {
+  email: string;
+  error: string;
+  showError: boolean;
+}
+class Login extends React.Component<ILoginProps, ILoginState> {
   state = {
     email: '',
     error: '',
@@ -30,9 +47,7 @@ class Login extends React.Component {
     if (showError) {
       this.setState({ error: 'Please enter valid email' });
     } else {
-      console.log('hi');
-      userActions.fetchUser(email);
-      this.setState({ email: '' });
+      this.props.userActions.fetchUser(email);
     }
   };
 
@@ -56,7 +71,7 @@ class Login extends React.Component {
   }
 }
 
-export function mapStateToProps(state: IStoreState) {
+export function mapStateToProps(state: any) {
   return {
     user: state.user,
   };

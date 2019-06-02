@@ -9,9 +9,9 @@ export function beginfetchUser() {
   };
 }
 
-export function fetchUserSuccess(User: string) {
+export function fetchUserSuccess(user: string) {
   return {
-    User,
+    user,
     type: types.FETCH_USER_SUCCESS,
   };
 }
@@ -25,14 +25,11 @@ export function fetchUserError(errorMsg: string | null, user: string) {
 
 export const fetchUser: any = (email: string) => {
   return async (dispatch: redux.Dispatch) => {
-    console.log('hiiiiii');
     dispatch(beginfetchUser());
 
     try {
-      console.log('were here now!');
       const { data } = await axios.get(`/api/email?email=${email}`);
-      console.log('data', data);
-      dispatch(fetchUserSuccess(data));
+      dispatch(fetchUserSuccess(data.email));
     } catch (err) {
       dispatch(fetchUserError(err.response.data, email));
     }
