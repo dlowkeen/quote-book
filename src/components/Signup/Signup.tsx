@@ -10,7 +10,7 @@ export function validateEmail(email: string) {
   return re.test(String(email).toLowerCase());
 }
 
-interface ILoginProps {
+interface ISignupProps {
   errorMsg: string;
   user: any;
   userActions: any;
@@ -22,12 +22,12 @@ interface ILoginProps {
   };
 }
 
-interface ILoginState {
+interface ISignupState {
   email: string;
   error: string;
   showError: boolean;
 }
-class Login extends React.Component<ILoginProps, ILoginState> {
+class Signup extends React.Component<ISignupProps, ISignupState> {
   state = {
     email: '',
     error: '',
@@ -48,7 +48,7 @@ class Login extends React.Component<ILoginProps, ILoginState> {
     if (showError) {
       this.setState({ error: 'Please enter valid email' });
     } else {
-      this.props.userActions.fetchUser(email, 'login');
+      this.props.userActions.fetchUser(email, 'signup');
     }
   };
 
@@ -64,7 +64,7 @@ class Login extends React.Component<ILoginProps, ILoginState> {
           value={this.state.email}
           onChange={this.handleChange}
         />
-        <button onClick={this.onClick}>Login</button>
+        <button onClick={this.onClick}>Sign Up</button>
         <div>
           <p>{showError ? error : ''}</p>
         </div>
@@ -88,4 +88,4 @@ export function mapDispatchToProps(dispatch: redux.Dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Login);
+)(Signup);
