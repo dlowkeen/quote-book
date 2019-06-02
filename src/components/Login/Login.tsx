@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import redux, { bindActionCreators } from 'redux';
 import { userActions } from '../../actions';
 
+import Navbar from '../Navbar';
+
 export function validateEmail(email: string) {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
@@ -55,6 +57,7 @@ class Login extends React.Component<ILoginProps, ILoginState> {
     const { showError, error } = this.state;
     return (
       <div>
+        <Navbar />
         <input
           type='email'
           name='email'

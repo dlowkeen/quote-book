@@ -18,3 +18,9 @@ export const mailJet = {
   apiKeyPrivate: '67859e5295026552d70f866e16d5db36', // process.env.MJ_APIKEY_PRIVATE || "NA",
   apiKeyPublic: 'e4d5e9c0574389cbebedcd53e7171def', //  process.env.MJ_APIKEY_PUBLIC || "NA"
 };
+
+export const mongo = {
+  uri: 'mongodb://ds231307.mlab.com:31307/quote-book', // TO-DO: store in env variables
+  password: 'Quotebook1!', // TO-DO: store in env variables
+  user: 'admin', // TO-DO: store in env variables
+};

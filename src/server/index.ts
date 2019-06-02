@@ -1,6 +1,8 @@
 import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
+import mongoose from 'mongoose';
+import * as config from '../config';
 
 import { IMAGES_DIR, PORT, WEBPACK_OUTPUT_DIR } from '../config';
 import middleware from './middleware';
@@ -11,6 +13,17 @@ const app = express();
 app.use(helmet());
 // Allow cross-domain requests
 app.use(cors());
+
+mongoose.connect(
+  config.mongo.uri,
+  {
+    auth: {
+      password: config.mongo.password,
+      user: config.mongo.user,
+    },
+    useNewUrlParser: true,
+  },
+);
 
 middleware(app);
 

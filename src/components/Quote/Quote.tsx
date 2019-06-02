@@ -1,7 +1,28 @@
 import axios from 'axios';
 import React from 'react';
+import { connect } from 'react-redux';
+import redux, { bindActionCreators } from 'redux';
+import { userActions } from '../../actions';
 
-class Quotes extends React.Component {
+interface IQuoteProps {
+  errorMsg: string;
+  user: any;
+  userActions: any;
+  loadingUser: boolean;
+  match: {
+    params: {
+      id: string;
+    };
+  };
+}
+
+interface IQuoteState {
+  quote: string;
+  author: string;
+  error: string;
+  showError: boolean;
+}
+class Quote extends React.Component<IQuoteProps, IQuoteState> {
   state = {
     quote: '',
     author: '',
@@ -10,14 +31,16 @@ class Quotes extends React.Component {
   };
   handleChange = (event: any) => {
     this.setState({ [event.target.name]: event.target.value });
+    console.log('props', this.props);
   };
 
   onClick = async () => {
-    console.log('this.state', this.state);
+    console.log('this.props', this.props.user);
     const { quote, author, error, showError } = this.state;
     const data = {
       author,
       quote,
+      user: this.props.user.user,
     };
     const blah = await axios.post(`/api/quote`, data);
     this.setState({ author: '', quote: '' });
@@ -50,4 +73,19 @@ class Quotes extends React.Component {
   }
 }
 
-export default Quotes;
+export function mapStateToProps(state: any) {
+  return {
+    user: state.user,
+  };
+}
+
+export function mapDispatchToProps(dispatch: redux.Dispatch) {
+  return {
+    userActions: bindActionCreators(userActions, dispatch),
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Quote);
