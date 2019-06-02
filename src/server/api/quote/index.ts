@@ -24,8 +24,8 @@ export async function get(req: express.Request, res: express.Response) {
   const { qty, user } = req.query;
   const doc = await User.findOne({ user });
   if (doc) {
-    if (qty === 1) {
-      const totalQuotes = doc.quotes.length; // 3
+    if (parseInt(qty, 0) === 1) {
+      const totalQuotes = doc.quotes.length;
       const random = Math.floor(Math.random() * totalQuotes);
       res.status(200).send({ quotes: doc.quotes[random], succes: true });
     } else {
