@@ -32,11 +32,9 @@ class Quote extends React.Component<IQuoteProps, IQuoteState> {
   };
   handleChange = (event: any) => {
     this.setState({ [event.target.name]: event.target.value });
-    console.log('props', this.props);
   };
 
   onClick = async () => {
-    console.log('this.props', this.props.user);
     const { quote, author, error, showError } = this.state;
     const data = {
       author,
@@ -67,9 +65,6 @@ class Quote extends React.Component<IQuoteProps, IQuoteState> {
           onChange={this.handleChange}
         />
         <button onClick={this.onClick}>Submit</button>
-        {/* <div>
-          <p>{showError ? error : ""}</p>
-        </div> */}
       </div>
     );
   }

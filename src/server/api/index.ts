@@ -9,6 +9,7 @@ const router = express.Router();
 router.get('/demo-data', demoData.get);
 router.get('/email', email.send);
 router.post('/quote', quote.submit);
+router.get('/quote', quote.get);
 
 router.get('/healthcheck', (req, res) => {
   return res.send('OK');

@@ -6,18 +6,33 @@ export async function submit(req: express.Request, res: express.Response) {
   const { author, quote, user } = req.body;
   const addQuote: IQuote = {
     author,
+    createdOn: new Date(),
     quote,
   };
-  // find mongo record of user
   const doc = await User.findOne({ user });
   if (doc) {
     doc.quotes.push(addQuote);
     await doc.save();
+    res.status(200).send({ success: true });
   } else {
     console.log('shouldnt have gotten here...');
+    res.status(500).send({ success: false });
   }
+}
 
-  // add quote to user
-  // save
-  res.status(200).send({ success: true });
+export async function get(req: express.Request, res: express.Response) {
+  const { qty, user } = req.query;
+  const doc = await User.findOne({ user });
+  if (doc) {
+    if (qty === 1) {
+      const totalQuotes = doc.quotes.length; // 3
+      const random = Math.floor(Math.random() * totalQuotes);
+      res.status(200).send({ quotes: doc.quotes[random], succes: true });
+    } else {
+      res.status(200).send({ quotes: doc.quotes, succes: true });
+    }
+  } else {
+    console.log('shouldnt have gotten here...');
+    res.status(500).send({ success: false });
+  }
 }
