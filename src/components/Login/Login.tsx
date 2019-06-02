@@ -1,5 +1,8 @@
 import axios from 'axios';
 import React from 'react';
+import { connect } from 'react-redux';
+import redux, { bindActionCreators } from 'redux';
+import { userActions } from '../../actions';
 
 export function validateEmail(email: string) {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -27,11 +30,8 @@ class Login extends React.Component {
     if (showError) {
       this.setState({ error: 'Please enter valid email' });
     } else {
-      console.log('email', email);
-      const blah = await axios.get(`/api/email?email=${email}`);
-      const healthcheck = await axios.get('/api/healthcheck');
-      console.log('healthcheck', healthcheck);
-      console.log('blah', blah);
+      console.log('hi');
+      userActions.fetchUser(email);
       this.setState({ email: '' });
     }
   };
@@ -56,4 +56,19 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export function mapStateToProps(state: IStoreState) {
+  return {
+    user: state.user,
+  };
+}
+
+export function mapDispatchToProps(dispatch: redux.Dispatch) {
+  return {
+    userActions: bindActionCreators(userActions, dispatch),
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Login);
