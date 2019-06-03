@@ -4,7 +4,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { DemoContainer } from '../Demo';
 import Login from '../Login';
 import Quote from '../Quote';
-import QuoteBook from '../QuotebOok';
+import QuoteBook from '../Quotebook';
 import QuoteRandom from '../QuoteRandom';
 import Signup from '../Signup';
 
