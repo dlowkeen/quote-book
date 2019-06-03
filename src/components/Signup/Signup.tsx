@@ -11,7 +11,7 @@ export function validateEmail(email: string) {
 }
 
 interface ISignupProps {
-  errorMsg: string;
+  errorMsg: any;
   user: any;
   userActions: any;
   loadingUser: boolean;
@@ -47,6 +47,10 @@ class Signup extends React.Component<ISignupProps, ISignupState> {
   onClick = async () => {
     console.log('this.state', this.state);
     const { email, error, password, showError } = this.state;
+    if (this.state.password === '') {
+      this.setState({ showError: true, error: 'Password cannot be blank' });
+      return;
+    }
     if (showError) {
       this.setState({ error: 'Please enter valid email' });
     } else {
@@ -56,6 +60,8 @@ class Signup extends React.Component<ISignupProps, ISignupState> {
 
   render() {
     const { showError, error } = this.state;
+    const { user } = this.props;
+    console.log('this.props', this.props);
     return (
       <div>
         <Navbar />
@@ -76,6 +82,11 @@ class Signup extends React.Component<ISignupProps, ISignupState> {
         <button onClick={this.onClick}>Sign Up</button>
         <div>
           <p>{showError ? error : ''}</p>
+          <p>
+            {user.errorMsg && user.errorMsg.message
+              ? user.errorMsg.message
+              : ''}
+          </p>
         </div>
       </div>
     );

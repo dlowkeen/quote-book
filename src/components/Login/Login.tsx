@@ -47,6 +47,10 @@ class Login extends React.Component<ILoginProps, ILoginState> {
   onClick = async () => {
     console.log('this.state', this.state);
     const { email, error, password, showError } = this.state;
+    if (this.state.password === '') {
+      this.setState({ showError: true, error: 'Password cannot be blank' });
+      return;
+    }
     if (showError) {
       this.setState({ error: 'Please enter valid email' });
     } else {
@@ -56,6 +60,7 @@ class Login extends React.Component<ILoginProps, ILoginState> {
 
   render() {
     const { showError, error } = this.state;
+    const { user } = this.props;
     return (
       <div>
         <Navbar />
@@ -76,6 +81,11 @@ class Login extends React.Component<ILoginProps, ILoginState> {
         <button onClick={this.onClick}>Login</button>
         <div>
           <p>{showError ? error : ''}</p>
+          <p>
+            {user.errorMsg && user.errorMsg.message
+              ? user.errorMsg.message
+              : ''}
+          </p>
         </div>
       </div>
     );
