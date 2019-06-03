@@ -10,9 +10,9 @@ const mailjet = mailJet.connect(
 );
 
 export async function send(req: express.Request, res: express.Response) {
-  const { action, email } = req.query;
-  console.log('action and email', action, email);
-  const doc = await User.findOne({ user: email });
+  const { action, email, password } = req.body;
+  console.log('action and email', action, email, password);
+  const doc = await User.findOne({ user: email, password });
   console.log('doc', doc);
   if (action === 'login') {
     if (doc) {
@@ -28,7 +28,7 @@ export async function send(req: express.Request, res: express.Response) {
     if (doc) {
       res.status(500).send({ message: 'Email already taken', success: false });
     } else {
-      User.create({ user: email });
+      User.create({ user: email, password });
 
       const requestJet = mailjet.post('send', { version: 'v3.1' }).request({
         Messages: [

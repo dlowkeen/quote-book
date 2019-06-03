@@ -7,7 +7,7 @@ import * as quote from './quote';
 const router = express.Router();
 
 router.get('/demo-data', demoData.get);
-router.get('/email', email.send);
+router.post('/email', email.send);
 router.post('/quote', quote.submit);
 router.get('/quote', quote.get);
 

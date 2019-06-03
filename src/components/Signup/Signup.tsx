@@ -25,12 +25,14 @@ interface ISignupProps {
 interface ISignupState {
   email: string;
   error: string;
+  password: string;
   showError: boolean;
 }
 class Signup extends React.Component<ISignupProps, ISignupState> {
   state = {
     email: '',
     error: '',
+    password: '',
     showError: true,
   };
   handleChange = (event: any) => {
@@ -44,11 +46,11 @@ class Signup extends React.Component<ISignupProps, ISignupState> {
 
   onClick = async () => {
     console.log('this.state', this.state);
-    const { email, error, showError } = this.state;
+    const { email, error, password, showError } = this.state;
     if (showError) {
       this.setState({ error: 'Please enter valid email' });
     } else {
-      this.props.userActions.fetchUser(email, 'signup');
+      this.props.userActions.fetchUser(email, 'signup', password);
     }
   };
 
@@ -62,6 +64,13 @@ class Signup extends React.Component<ISignupProps, ISignupState> {
           name='email'
           placeholder=' Email'
           value={this.state.email}
+          onChange={this.handleChange}
+        />
+        <input
+          type='password'
+          name='password'
+          placeholder=' Password'
+          value={this.state.password}
           onChange={this.handleChange}
         />
         <button onClick={this.onClick}>Sign Up</button>

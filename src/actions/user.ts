@@ -23,15 +23,22 @@ export function fetchUserError(errorMsg: string | null, user: string) {
   };
 }
 
-export const fetchUser: any = (email: string, action: string) => {
+export const fetchUser: any = (
+  email: string,
+  action: string,
+  password: string,
+) => {
   return async (dispatch: redux.Dispatch) => {
     dispatch(beginfetchUser());
 
     try {
       console.log('email', email, action);
-      const { data } = await axios.get(
-        `/api/email?email=${email}&action=${action}`,
-      );
+      const payload = {
+        action,
+        email,
+        password,
+      };
+      const { data } = await axios.post('/api/email', payload);
       console.log('data', data);
       dispatch(fetchUserSuccess(data.email));
     } catch (err) {

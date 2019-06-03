@@ -25,12 +25,14 @@ interface ILoginProps {
 interface ILoginState {
   email: string;
   error: string;
+  password: string;
   showError: boolean;
 }
 class Login extends React.Component<ILoginProps, ILoginState> {
   state = {
     email: '',
     error: '',
+    password: '',
     showError: true,
   };
   handleChange = (event: any) => {
@@ -44,11 +46,11 @@ class Login extends React.Component<ILoginProps, ILoginState> {
 
   onClick = async () => {
     console.log('this.state', this.state);
-    const { email, error, showError } = this.state;
+    const { email, error, password, showError } = this.state;
     if (showError) {
       this.setState({ error: 'Please enter valid email' });
     } else {
-      this.props.userActions.fetchUser(email, 'login');
+      this.props.userActions.fetchUser(email, 'login', password);
     }
   };
 
@@ -62,6 +64,13 @@ class Login extends React.Component<ILoginProps, ILoginState> {
           name='email'
           placeholder=' Email'
           value={this.state.email}
+          onChange={this.handleChange}
+        />
+        <input
+          type='password'
+          name='password'
+          placeholder=' Password'
+          value={this.state.password}
           onChange={this.handleChange}
         />
         <button onClick={this.onClick}>Login</button>
