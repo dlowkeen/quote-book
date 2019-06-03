@@ -32,10 +32,8 @@ class QuoteRandom extends React.Component<
   }
   renderQuotes = () => {
     console.log('this.props', this.props);
-    const { quotes } = this.props.quotes;
-    if (quotes) {
-      console.log('quotes exists', quotes);
-      const displayed = quotes.map((x: any) => {
+    if (this.props.quotes && this.props.quotes.quotes) {
+      const displayed = this.props.quotes.quotes.map((x: any) => {
         return (
           <div key={x.quote}>
             <h3>{x.quote}</h3>
@@ -44,6 +42,8 @@ class QuoteRandom extends React.Component<
         );
       });
       return displayed;
+    } else {
+      return <h2>You need to add some quotes first!</h2>;
     }
   };
   render() {

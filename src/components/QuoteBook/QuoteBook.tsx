@@ -30,8 +30,9 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
     this.props.quoteActions.fetchQuotes(this.props.user.user, 'all');
   }
   renderQuotes = () => {
+    console.log('this.props', this.props);
     const { quotes } = this.props.quotes;
-    if (quotes) {
+    if (quotes && quotes.length > 0) {
       const displayed = quotes.map((x: any) => {
         return (
           <div key={x.quote}>
@@ -41,6 +42,8 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
         );
       });
       return displayed;
+    } else {
+      return <h2>You need to add some quotes first!</h2>;
     }
   };
   render() {

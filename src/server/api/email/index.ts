@@ -20,21 +20,17 @@ export async function send(req: express.Request, res: express.Response) {
       res.status(200).send({ email, success: true });
     } else {
       // return error: You need to sign up first
-      res
-        .status(500)
-        .send({
-          message: 'Account does not exist. You need to sign up first!',
-          success: false,
-        });
+      res.status(500).send({
+        message: 'Account does not exist. You need to sign up first!',
+        success: false,
+      });
     }
   } else if (action === 'signup') {
     if (doc) {
-      res
-        .status(500)
-        .send({
-          message: 'Account already exists. Please login.',
-          success: false,
-        });
+      res.status(500).send({
+        message: 'Account already exists. Please login.',
+        success: false,
+      });
     } else {
       User.create({ user: email, password });
 
