@@ -19,9 +19,9 @@ class LoginSignup extends React.Component {
     return (
       <div>
         {this.state.login ? <Login /> : <Signup />}
-        <button onClick={this.toggle}>
-          {this.state.login ? 'Signup' : 'Login'}
-        </button>
+        <span onClick={this.toggle}>
+          {this.state.login ? 'Signup for an account' : 'Login to your account'}
+        </span>
       </div>
     );
   }

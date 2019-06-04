@@ -9,10 +9,6 @@ const Landing: React.FunctionComponent = () => {
   return (
     <div>
       <Header />
-      <Navbar />
-      <div>
-        <h1>Simple Quote Book</h1>
-      </div>
       <Spacer />
       <div />
       <div>
