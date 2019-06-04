@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import redux, { bindActionCreators } from 'redux';
 import { userActions } from '../../actions';
 
@@ -60,6 +61,9 @@ class Login extends React.Component<ILoginProps, ILoginState> {
   render() {
     const { showError, error } = this.state;
     const { user } = this.props;
+    if (this.props && this.props.user && this.props.user.user) {
+      return <Redirect to='/profile' />;
+    }
     return (
       <div>
         <input

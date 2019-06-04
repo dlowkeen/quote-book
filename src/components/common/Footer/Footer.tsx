@@ -100,7 +100,7 @@ export const Footer: React.FunctionComponent = () => {
             </li>
           </ul>
           <div className={styles.footerCopyright}>
-            &copy; 2019 Gavano, all rights reserved
+            &copy; 2019 SimpleQuoteBook, all rights reserved
           </div>
         </div>
       </div>
