@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import redux, { bindActionCreators } from 'redux';
 import { quoteActions } from '../../actions';
-import Navbar from '../Navbar';
 
 interface IQuoteRandomProps {
   errorMsg: string;
@@ -31,7 +30,6 @@ class QuoteRandom extends React.Component<
     this.props.quoteActions.fetchQuotes(this.props.user.user, 1);
   }
   renderQuotes = () => {
-    console.log('this.props', this.props);
     if (this.props.quotes && this.props.quotes.quotes) {
       const displayed = this.props.quotes.quotes.map((x: any) => {
         return (
@@ -49,7 +47,6 @@ class QuoteRandom extends React.Component<
   render() {
     return (
       <div>
-        <Navbar />
         <h1>Random Quote From Your Collection</h1>
         {this.renderQuotes()}
       </div>

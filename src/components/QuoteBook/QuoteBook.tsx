@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import redux, { bindActionCreators } from 'redux';
 import { quoteActions } from '../../actions';
-import Navbar from '../Navbar';
+import * as styles from './styles.css';
 
 interface IQuoteBookProps {
   errorMsg: string;
@@ -25,17 +25,14 @@ interface IQuoteBookState {
 }
 class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
   componentDidMount() {
-    console.log('hi');
-    console.log('this.props', this.props);
     this.props.quoteActions.fetchQuotes(this.props.user.user, 'all');
   }
   renderQuotes = () => {
-    console.log('this.props', this.props);
     const { quotes } = this.props.quotes;
     if (quotes && quotes.length > 0) {
       const displayed = quotes.map((x: any) => {
         return (
-          <div key={x.quote}>
+          <div className={styles.card} key={x.quote}>
             <h3>{x.quote}</h3>
             <p>Author: {x.author || x.author === '' ? x.author : 'unknown'}</p>
           </div>
@@ -49,7 +46,6 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
   render() {
     return (
       <div>
-        <Navbar />
         <h1>Quote Book</h1>
         {this.renderQuotes()}
       </div>

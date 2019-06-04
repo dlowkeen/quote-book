@@ -3,7 +3,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import redux, { bindActionCreators } from 'redux';
 import { userActions } from '../../actions';
-import Navbar from '../Navbar';
 
 interface IQuoteProps {
   errorMsg: string;
@@ -49,7 +48,6 @@ class Quote extends React.Component<IQuoteProps, IQuoteState> {
     const { showError, error } = this.state;
     return (
       <div>
-        <Navbar />
         <input
           type='quote'
           name='quote'
