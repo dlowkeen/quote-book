@@ -97,8 +97,11 @@ This service can deployed using docker. A Dockerfile is included which can be us
 # Using heroku to deploy Docker container
 
 `docker build -t registry.heroku.com/${YOUR_APP_NAME}/web .`
+example: `docker build -t registry.heroku.com/simple-quote-book/web .`
 `docker push registry.heroku.com/${YOUR_APP_NAME}/web`
-`heroku container:release web --app simple-quote-book`
+example: `docker push registry.heroku.com/simple-quote-book/web`
+`heroku container:release web --app <name of heroku app>`
+example: `heroku container:release web --app simple-quote-book`
 
 # Renaming Heroku App
 `heroku apps:rename <newname> --app <oldname>`
