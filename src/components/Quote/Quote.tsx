@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import redux, { bindActionCreators } from 'redux';
 import { userActions } from '../../actions';
 import Footer from '../common/Footer';
@@ -49,6 +50,10 @@ class Quote extends React.Component<IQuoteProps, IQuoteState> {
 
   render() {
     const { showError, error } = this.state;
+    const { user } = this.props;
+    if (this.props && this.props.user && this.props.user.user === '') {
+      return <Redirect to='/' />;
+    }
     return (
       <div>
         <Header />

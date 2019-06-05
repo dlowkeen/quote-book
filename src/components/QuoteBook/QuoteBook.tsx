@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import redux, { bindActionCreators } from 'redux';
 import { quoteActions } from '../../actions';
 import * as styles from './styles.css';
@@ -49,6 +50,10 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
     }
   };
   render() {
+    const { user } = this.props;
+    if (this.props && this.props.user && this.props.user.user === '') {
+      return <Redirect to='/' />;
+    }
     return (
       <div>
         <h1>Quotes</h1>

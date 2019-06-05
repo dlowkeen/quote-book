@@ -1,11 +1,8 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-
-import { DemoContainer } from '../Demo';
 import Landing from '../Landing';
 import Profile from '../Profile';
 import Quote from '../Quote';
-import QuoteBook from '../QuoteBook';
 import QuoteRandom from '../QuoteRandom';
 
 const Router: React.FunctionComponent = () => (
@@ -13,7 +10,6 @@ const Router: React.FunctionComponent = () => (
     <Route exact path='/' component={Landing} />
     <Route exact path='/profile' component={Profile} />
     <Route exact path='/quote' component={Quote} />
-    <Route exact path='/quote/all' component={QuoteBook} />
     <Route exact path='/quote/random' component={QuoteRandom} />
 
     {/* Redirect insures we always have something sensible to render */}
