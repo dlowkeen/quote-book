@@ -93,3 +93,12 @@ This service can deployed using docker. A Dockerfile is included which can be us
 - Build: from the root directory of this repo, run `docker build -it <registry>/<repo_name>:<tag> .`
 - Push to registry: `docker push <registry>/<repo_name>:<tag>`
 - Run locally: `docker run -d --rm -p 3000:3000 -e NODE_ENV=staging --name=test <registry>/<repo_name>:<tag>`
+
+# Using heroku to deploy Docker container
+
+`docker build -t registry.heroku.com/${YOUR_APP_NAME}/web .`
+`docker push registry.heroku.com/${YOUR_APP_NAME}/web`
+`heroku container:release web --app simple-quote-book`
+
+# Renaming Heroku App
+`heroku apps:rename <newname> --app <oldname>`
