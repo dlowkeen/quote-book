@@ -1,0 +1,25 @@
+.inputfield {
+  color: #7f7f7f;
+  font-size: 1.5rem;
+  font-weight: 300;
+  font-family: canada-type-gibson;
+  height: 40px;
+  background-color: #f0f0f0;
+  border: 2px solid #bfbfbf;
+  width: 28rem;
+  margin: 5px 5px 5px 5px;
+}
+
+.submitbtn {
+  width: 28rem;
+  height: 45px;
+  font-size: 2rem;
+  margin-top: 3vh;
+  background-color: #838de9;
+  border-color: #838de9;
+  border-radius: 0;
+}
+
+.center {
+  text-align: center;
+}

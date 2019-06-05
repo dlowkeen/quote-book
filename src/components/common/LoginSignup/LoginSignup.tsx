@@ -1,6 +1,7 @@
 import React from 'react';
 import Login from '../../Login';
 import Signup from '../../Signup';
+import * as styles from '../../styles.css';
 
 class LoginSignup extends React.Component {
   state = {
@@ -17,7 +18,7 @@ class LoginSignup extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className={styles.center}>
         {this.state.login ? <Login /> : <Signup />}
         <span onClick={this.toggle}>
           {this.state.login ? 'Signup for an account' : 'Login to your account'}

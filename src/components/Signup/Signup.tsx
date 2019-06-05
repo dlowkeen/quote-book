@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import redux, { bindActionCreators } from 'redux';
 import { userActions } from '../../actions';
+import * as styles from '../styles.css';
 
 export function validateEmail(email: string) {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -66,22 +67,27 @@ class Signup extends React.Component<ISignupProps, ISignupState> {
       return <Redirect to='/profile' />;
     }
     return (
-      <div>
-        <input
-          type='email'
-          name='email'
-          placeholder=' Email'
-          value={this.state.email}
-          onChange={this.handleChange}
-        />
-        <input
-          type='password'
-          name='password'
-          placeholder=' Password'
-          value={this.state.password}
-          onChange={this.handleChange}
-        />
-        <button onClick={this.onClick}>Sign Up</button>
+      <div className={styles.center}>
+        <div>
+          <input
+            className={styles.inputfield}
+            type='email'
+            name='email'
+            placeholder=' Email'
+            value={this.state.email}
+            onChange={this.handleChange}
+          />
+        </div>
+        <div>
+          <input
+            className={styles.inputfield}
+            type='password'
+            name='password'
+            placeholder=' Password'
+            value={this.state.password}
+            onChange={this.handleChange}
+          />
+        </div>
         <div>
           <p>{showError ? error : ''}</p>
           <p>
@@ -90,6 +96,9 @@ class Signup extends React.Component<ISignupProps, ISignupState> {
               : ''}
           </p>
         </div>
+        <button className={styles.submitbtn} onClick={this.onClick}>
+          Signup
+        </button>
       </div>
     );
   }

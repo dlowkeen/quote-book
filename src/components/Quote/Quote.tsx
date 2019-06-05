@@ -7,6 +7,7 @@ import { userActions } from '../../actions';
 import Footer from '../common/Footer';
 import Header from '../common/Header';
 import Spacer from '../common/Spacer';
+import * as styles from '../styles.css';
 
 interface IQuoteProps {
   errorMsg: string;
@@ -55,23 +56,31 @@ class Quote extends React.Component<IQuoteProps, IQuoteState> {
       return <Redirect to='/' />;
     }
     return (
-      <div>
+      <div className={styles.center}>
         <Header />
-        <input
-          type='quote'
-          name='quote'
-          placeholder='Quote'
-          value={this.state.quote}
-          onChange={this.handleChange}
-        />
-        <input
-          type='author'
-          name='author'
-          placeholder='Author'
-          value={this.state.author}
-          onChange={this.handleChange}
-        />
-        <button onClick={this.onClick}>Submit</button>
+        <div>
+          <input
+            className={styles.inputfield}
+            type='quote'
+            name='quote'
+            placeholder='Quote'
+            value={this.state.quote}
+            onChange={this.handleChange}
+          />
+        </div>
+        <div>
+          <input
+            className={styles.inputfield}
+            type='author'
+            name='author'
+            placeholder='Author'
+            value={this.state.author}
+            onChange={this.handleChange}
+          />
+        </div>
+        <button className={styles.submitbtn} onClick={this.onClick}>
+          Signup
+        </button>
         <Spacer />
         <Footer />
       </div>
