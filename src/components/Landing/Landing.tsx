@@ -9,8 +9,6 @@ const Landing: React.FunctionComponent = () => {
   return (
     <div>
       <Header />
-      <Spacer />
-      <div />
       <div>
         <p>Keep your quotes stored electronically :) </p>
       </div>
@@ -18,7 +16,6 @@ const Landing: React.FunctionComponent = () => {
         <LoginSignup />
       </div>
       <Spacer />
-      <div />
       <Spacer />
       <Spacer />
       <Footer />

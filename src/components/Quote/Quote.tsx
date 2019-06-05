@@ -3,6 +3,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import redux, { bindActionCreators } from 'redux';
 import { userActions } from '../../actions';
+import Footer from '../common/Footer';
+import Header from '../common/Header';
+import Spacer from '../common/Spacer';
 
 interface IQuoteProps {
   errorMsg: string;
@@ -48,6 +51,7 @@ class Quote extends React.Component<IQuoteProps, IQuoteState> {
     const { showError, error } = this.state;
     return (
       <div>
+        <Header />
         <input
           type='quote'
           name='quote'
@@ -63,6 +67,8 @@ class Quote extends React.Component<IQuoteProps, IQuoteState> {
           onChange={this.handleChange}
         />
         <button onClick={this.onClick}>Submit</button>
+        <Spacer />
+        <Footer />
       </div>
     );
   }

@@ -2,6 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import redux, { bindActionCreators } from 'redux';
 import { quoteActions } from '../../actions';
+import Footer from '../common/Footer';
+import Header from '../common/Header';
+import Spacer from '../common/Spacer';
 
 interface IQuoteRandomProps {
   errorMsg: string;
@@ -47,8 +50,11 @@ class QuoteRandom extends React.Component<
   render() {
     return (
       <div>
+        <Header />
         <h1>Random Quote From Your Collection</h1>
         {this.renderQuotes()}
+        <Spacer />
+        <Footer />
       </div>
     );
   }

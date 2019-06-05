@@ -32,9 +32,14 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
     if (quotes && quotes.length > 0) {
       const displayed = quotes.map((x: any) => {
         return (
-          <div className={styles.card} key={x.quote}>
-            <h3>{x.quote}</h3>
-            <p>Author: {x.author || x.author === '' ? x.author : 'unknown'}</p>
+          <div key={x.quote}>
+            <div className={styles.card}>
+              <h3>"{x.quote}"</h3>
+              <p>
+                Author: {x.author || x.author === '' ? x.author : 'unknown'}
+              </p>
+            </div>
+            <br />
           </div>
         );
       });
@@ -46,7 +51,7 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
   render() {
     return (
       <div>
-        <h1>Quote Book</h1>
+        <h1>Quotes</h1>
         {this.renderQuotes()}
       </div>
     );
