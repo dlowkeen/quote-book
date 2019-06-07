@@ -11,7 +11,7 @@ const mailjet = mailJet.connect(
 
 export async function send(req: express.Request, res: express.Response) {
   const { action, email, password } = req.body;
-  const cleanedEmail = email.toLowercase();
+  const cleanedEmail = email.toLowerCase();
   const doc = await User.findOne({ user: cleanedEmail, password });
   console.log('doc', doc);
   if (action === 'login') {
