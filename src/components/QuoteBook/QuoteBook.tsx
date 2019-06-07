@@ -23,6 +23,7 @@ interface IQuoteBookState {
   error: string;
   showError: boolean;
   showAll: boolean;
+  message: string;
 }
 class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
   state = {
@@ -30,12 +31,23 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
     error: '',
     showError: false,
     showAll: true,
+    message: '',
   };
   componentDidMount() {
     const { showAll } = this.state;
     const qty = showAll ? 'all' : '1';
     this.props.quoteActions.fetchQuotes(this.props.user.user, qty);
   }
+  handleClick = (ev: any) => {
+    // access to e.target here
+    console.log(ev);
+    this.setState({
+      message: `author ${ev.currentTarget.dataset.author}, quote ${
+        ev.currentTarget.dataset.quote
+      }`,
+    });
+    console.log('this.state', this.state);
+  };
   renderQuotes = () => {
     const { quotes } = this.props.quotes;
     if (quotes && quotes.length > 0) {
@@ -43,14 +55,22 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
         return (
           <div key={x.quote}>
             <div className={styles.card}>
-              <h3>"{x.quote}"</h3>
-              <p>
-                Author: {x.author || x.author === '' ? x.author : 'unknown'}
-              </p>
-              <span>
-                <p>Edit</p>
-                <p>Delete</p>
-              </span>
+              <div className={styles.above}>
+                <button
+                  data-author={x.author}
+                  data-quote={x.quote}
+                  onClick={e => this.handleClick(e)}
+                >
+                  Edit
+                </button>
+                {/* <p>Delete</p> */}
+              </div>
+              <div>
+                <h3>"{x.quote}"</h3>
+                <p>
+                  Author: {x.author || x.author === '' ? x.author : 'unknown'}
+                </p>
+              </div>
             </div>
             <br />
           </div>

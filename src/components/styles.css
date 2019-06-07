@@ -10,6 +10,12 @@
   margin: 5px 5px 5px 5px;
 }
 
+.inputfieldtextarea {
+  width: 28rem;
+  margin: 5px;
+  height: 28rem;
+}
+
 .submitbtn {
   width: 28rem;
   height: 45px;
@@ -39,4 +45,9 @@
   .container {
     margin: 10px 10px;
   }
+}
+
+.above {
+  z-index: 2;
+  float: right;
 }

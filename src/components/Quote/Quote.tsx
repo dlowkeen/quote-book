@@ -59,11 +59,10 @@ class Quote extends React.Component<IQuoteProps, IQuoteState> {
       <div className={styles.center}>
         <Header />
         <div>
-          <input
-            className={styles.inputfield}
-            type='quote'
+          <textarea
+            className={`${styles.inputfield} ${styles.inputfieldtextarea}`}
             name='quote'
-            placeholder='Quote'
+            placeholder='Add Quote Here'
             value={this.state.quote}
             onChange={this.handleChange}
           />
@@ -71,7 +70,7 @@ class Quote extends React.Component<IQuoteProps, IQuoteState> {
         <div>
           <input
             className={styles.inputfield}
-            type='author'
+            type='text'
             name='author'
             placeholder='Author'
             value={this.state.author}
