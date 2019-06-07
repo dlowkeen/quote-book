@@ -3,18 +3,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import redux, { bindActionCreators } from 'redux';
-import { userActions } from '../../actions';
-import * as styles from '../styles.css';
+import { userActions } from '../../../../actions';
+import * as styles from '../../../styles.css';
 
 export function validateEmail(email: string) {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
 }
 
-interface ILoginProps {
-  errorMsg: string;
+interface ISignupProps {
+  errorMsg: any;
   user: any;
   userActions: any;
+  history: any;
   loadingUser: boolean;
   match: {
     params: {
@@ -23,13 +24,13 @@ interface ILoginProps {
   };
 }
 
-interface ILoginState {
+interface ISignupState {
   email: string;
   error: string;
   password: string;
   showError: boolean;
 }
-class Login extends React.Component<ILoginProps, ILoginState> {
+class Signup extends React.Component<ISignupProps, ISignupState> {
   state = {
     email: '',
     error: '',
@@ -55,7 +56,7 @@ class Login extends React.Component<ILoginProps, ILoginState> {
     if (showError) {
       this.setState({ error: 'Please enter valid email' });
     } else {
-      this.props.userActions.fetchUser(email, 'login', password);
+      this.props.userActions.fetchUser(email, 'signup', password);
     }
   };
 
@@ -96,7 +97,7 @@ class Login extends React.Component<ILoginProps, ILoginState> {
           </p>
         </div>
         <button className={styles.submitbtn} onClick={this.onClick}>
-          Login
+          Signup
         </button>
       </div>
     );
@@ -118,4 +119,4 @@ export function mapDispatchToProps(dispatch: redux.Dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Login);
+)(Signup);

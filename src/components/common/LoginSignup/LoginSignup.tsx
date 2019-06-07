@@ -1,7 +1,7 @@
 import React from 'react';
-import Login from '../../Login';
-import Signup from '../../Signup';
 import * as styles from '../../styles.css';
+import Login from './Login';
+import Signup from './Signup';
 
 class LoginSignup extends React.Component {
   state = {

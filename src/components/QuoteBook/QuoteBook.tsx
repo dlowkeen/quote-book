@@ -47,6 +47,10 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
               <p>
                 Author: {x.author || x.author === '' ? x.author : 'unknown'}
               </p>
+              <span>
+                <p>Edit</p>
+                <p>Delete</p>
+              </span>
             </div>
             <br />
           </div>

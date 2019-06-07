@@ -11,8 +11,8 @@ const mailjet = mailJet.connect(
 
 export async function send(req: express.Request, res: express.Response) {
   const { action, email, password } = req.body;
-  console.log('action and email', action, email, password);
-  const doc = await User.findOne({ user: email, password });
+  const cleanedEmail = email.toLowercase();
+  const doc = await User.findOne({ user: cleanedEmail, password });
   console.log('doc', doc);
   if (action === 'login') {
     if (doc) {
@@ -32,7 +32,7 @@ export async function send(req: express.Request, res: express.Response) {
         success: false,
       });
     } else {
-      User.create({ user: email, password });
+      User.create({ user: cleanedEmail, password });
 
       const requestJet = mailjet.post('send', { version: 'v3.1' }).request({
         Messages: [
@@ -45,17 +45,17 @@ export async function send(req: express.Request, res: express.Response) {
             ],
             From: {
               Email: 'technology.nudge@gmail.com',
-              Name: 'Gavano Support',
+              Name: 'SimpleQuoteBook Support',
             },
             HTMLPart: `<h3>Dear ${email},</h3>
-            Thank you for signing up for <a href="https://hidden-inlet-70329.herokuapp.com/">Gavano</a>!<br />
-            We will let you know when we are ready to launch!`,
-            Subject: 'Sign up success!',
-            TextPart: `Dear ${email}, Thank you for signing up for Gavano! We will let you know when we are ready to launch!`,
+            Thank you for signing up for <a href="https://simple-quote-book.herokuapp.com/">SimpleQuoteBook</a>!<br />
+            This is the only email you'll get from us! Please let us know if you need anything.`,
+            Subject: 'Sign Up Confirmation',
+            TextPart: `Dear ${email}, Thank you for signing up for SimpleQuoteBook! This is the only email you'll get from us! Please let us know if you need anything.`,
             To: [
               {
                 Email: email,
-                Name: 'Customer',
+                Name: 'User',
               },
             ],
           },
