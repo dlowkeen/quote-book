@@ -79,7 +79,7 @@ class Quote extends React.Component<IQuoteProps, IQuoteState> {
           />
         </div>
         <button className={styles.submitbtn} onClick={this.onClick}>
-          Signup
+          Add Quote
         </button>
         <Spacer />
         <Footer />

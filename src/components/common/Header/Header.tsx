@@ -19,8 +19,7 @@ class Header extends React.Component<IHeaderProps> {
         <div className={styles.above}>
           {user && user.user ? (
             <div>
-              <Link to='/quote'>Add</Link> | <Link to='/profile'>View</Link> |{' '}
-              <Link to='/quote/random'>Random</Link>
+              <Link to='/quote'>Add</Link> | <Link to='/profile'>Profile</Link>
             </div>
           ) : (
             ''
