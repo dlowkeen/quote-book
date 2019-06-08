@@ -38,7 +38,7 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
     const qty = showAll ? 'all' : '1';
     this.props.quoteActions.fetchQuotes(this.props.user.user, qty);
   }
-  handleClick = (ev: any) => {
+  handleDeleteClick = (ev: any) => {
     // access to e.target here
     console.log(ev);
     this.setState({
@@ -46,35 +46,43 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
         ev.currentTarget.dataset.quote
       }`,
     });
-    console.log('this.state', this.state);
+    const payload = {
+      author: ev.currentTarget.dataset.author,
+      quote: ev.currentTarget.dataset.quote,
+      user: this.props.user.user,
+    };
+    console.log('payload', payload);
+    this.props.quoteActions.deleteQuote(payload);
   };
   renderQuotes = () => {
     const { quotes } = this.props.quotes;
     if (quotes && quotes.length > 0) {
       const displayed = quotes.map((x: any) => {
-        return (
-          <div key={x.quote}>
-            <div className={styles.card}>
-              <div className={styles.above}>
-                <button
-                  data-author={x.author}
-                  data-quote={x.quote}
-                  onClick={e => this.handleClick(e)}
-                >
-                  Edit
-                </button>
-                {/* <p>Delete</p> */}
+        if (x.status !== 'deleted') {
+          return (
+            <div key={x.quote}>
+              <div className={styles.card}>
+                <div className={styles.above}>
+                  <button
+                    data-author={x.author}
+                    data-quote={x.quote}
+                    onClick={this.handleDeleteClick}
+                  >
+                    Delete
+                  </button>
+                  {/* <p>Edit</p> */}
+                </div>
+                <div>
+                  <h3>"{x.quote}"</h3>
+                  <p>
+                    Author: {x.author || x.author === '' ? x.author : 'unknown'}
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3>"{x.quote}"</h3>
-                <p>
-                  Author: {x.author || x.author === '' ? x.author : 'unknown'}
-                </p>
-              </div>
+              <br />
             </div>
-            <br />
-          </div>
-        );
+          );
+        }
       });
       return displayed;
     } else {

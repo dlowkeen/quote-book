@@ -10,6 +10,7 @@ router.get('/demo-data', demoData.get);
 router.post('/email', email.send);
 router.post('/quote', quote.submit);
 router.get('/quote', quote.get);
+router.put('/quote', quote.deleteQuote);
 
 router.get('/healthcheck', (req, res) => {
   return res.send('OK');

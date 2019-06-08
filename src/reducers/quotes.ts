@@ -29,6 +29,25 @@ export default function quotes(state = initialState, action: any) {
         errorMsg,
         loadingQuotes: initialState.loadingQuotes,
       };
+    case types.DELETE_QUOTE:
+      return {
+        ...state,
+        errorMsg: initialState.errorMsg,
+        loadingQuotes: true,
+      };
+    case types.DELETE_QUOTE_SUCCESS:
+      return {
+        ...state,
+        errorMsg: initialState.errorMsg,
+        quotes,
+        loadingQuotes: initialState.loadingQuotes,
+      };
+    case types.DELETE_QUOTE_ERROR:
+      return {
+        ...state,
+        errorMsg,
+        loadingQuotes: initialState.loadingQuotes,
+      };
     default:
       return state;
   }

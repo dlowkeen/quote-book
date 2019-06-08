@@ -38,3 +38,39 @@ export const fetchQuotes: any = (email: string, qty: string) => {
     }
   };
 };
+
+export function begindeleteQuote() {
+  return {
+    type: types.DELETE_QUOTE,
+  };
+}
+
+export function deleteQuoteSuccess(quotes: string) {
+  return {
+    quotes,
+    type: types.DELETE_QUOTE_SUCCESS,
+  };
+}
+
+export function deleteQuoteError(errorMsg: string | null, user: string) {
+  return {
+    errorMsg: errorMsg || `Error deleting quote from user: ${user}`,
+    type: types.DELETE_QUOTE_ERROR,
+  };
+}
+
+export const deleteQuote: any = (payload: any) => {
+  return async (dispatch: redux.Dispatch) => {
+    dispatch(begindeleteQuote());
+
+    try {
+      // console.log('quote, author, user', quote, author, user);
+      const { data } = await axios.put(`/api/quote`, payload);
+      console.log('data', data);
+      dispatch(deleteQuoteSuccess(data.quotes));
+    } catch (err) {
+      console.log('err', err);
+      dispatch(deleteQuoteError(err.response.data, payload.user));
+    }
+  };
+};

@@ -3,6 +3,7 @@ import { Document, Model, model, Schema } from 'mongoose';
 export interface IQuote {
   author: string;
   quote: string;
+  status: string;
   createdOn: Date;
 }
 
