@@ -8,6 +8,7 @@ export async function submit(req: express.Request, res: express.Response) {
     author,
     createdOn: new Date(),
     quote,
+    status: 'active',
   };
   const doc = await User.findOne({ user });
   if (doc) {
@@ -44,24 +45,17 @@ export async function get(req: express.Request, res: express.Response) {
 export async function deleteQuote(req: express.Request, res: express.Response) {
   try {
     const { author, quote, user } = req.body;
-    const doc = await User.findOne({ user });
-    if (doc) {
-      for (const q of doc.quotes) {
-        if (q.author === author && q.quote === quote) {
-          q.status = 'deleted';
-        }
-      }
-      console.log('doc.quotes', doc.quotes);
-      const saved = await doc.save();
-      console.log('doc after', doc);
-      console.log('saved', saved);
-      return res.status(200).send({ quotes: doc.quotes, succes: true });
-    } else {
-      console.log('shouldnt have gotten here');
-      return res.status(500).send({ success: false });
+    const updated = await User.findOneAndUpdate(
+      { user, 'quotes.quote': quote, 'quotes.author': author },
+      {
+        $set: { 'quotes.$.status': 'deleted' },
+      },
+    );
+    if (updated) {
+      return res.status(200).send({ quotes: updated.quotes, succes: true });
     }
   } catch (e) {
     console.log('err', e);
-    return res.status(500).send({ success: false, error: e });
+    res.status(500).send({ success: false, error: e });
   }
 }
