@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import redux, { bindActionCreators } from 'redux';
 import { quoteActions } from '../../actions';
 import * as styles from '../styles.css';
+import { Modal } from '../ui/Modal';
 
 interface IQuoteBookProps {
   errorMsg: string;
@@ -23,7 +24,9 @@ interface IQuoteBookState {
   error: string;
   showError: boolean;
   showAll: boolean;
-  message: string;
+  targetAuthor: string;
+  targetQuote: string;
+  open: boolean;
 }
 class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
   state = {
@@ -31,7 +34,9 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
     error: '',
     showError: false,
     showAll: true,
-    message: '',
+    targetAuthor: '',
+    targetQuote: '',
+    open: false,
   };
   componentDidMount() {
     const { showAll } = this.state;
@@ -39,26 +44,30 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
     this.props.quoteActions.fetchQuotes(this.props.user.user, qty);
   }
   handleDeleteClick = (ev: any) => {
-    // access to e.target here
-    console.log(ev);
     this.setState({
-      message: `author ${ev.currentTarget.dataset.author}, quote ${
-        ev.currentTarget.dataset.quote
-      }`,
+      open: true,
+      targetAuthor: ev.currentTarget.dataset.author,
+      targetQuote: ev.currentTarget.dataset.quote,
     });
+  };
+  confirmDelete = () => {
     const payload = {
-      author: ev.currentTarget.dataset.author,
-      quote: ev.currentTarget.dataset.quote,
+      author: this.state.targetAuthor,
+      quote: this.state.targetQuote,
       user: this.props.user.user,
     };
-    console.log('payload', payload);
     this.props.quoteActions.deleteQuote(payload);
+    this.setState({ open: false });
+    this.props.quoteActions.fetchQuotes(this.props.user.user, 'all');
+  };
+  cancelDelete = () => {
+    this.setState({ open: false });
   };
   renderQuotes = () => {
     const { quotes } = this.props.quotes;
     if (quotes && quotes.length > 0) {
       const displayed = quotes.map((x: any) => {
-        if (x.status !== 'deleted') {
+        if (x.status === 'active') {
           return (
             <div key={x.quote}>
               <div className={styles.card}>
@@ -101,7 +110,6 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
     }
   };
   render() {
-    const { user } = this.props;
     if (this.props && this.props.user && this.props.user.user === '') {
       return <Redirect to='/' />;
     }
@@ -112,6 +120,18 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
           {this.state.showAll ? 'View Random Quote' : 'View All Quotes'}
         </span>
         <br />
+        <Modal
+          open={this.state.open}
+          children={
+            <div>
+              Are you sure you want to delete this quote?
+              <span>
+                <button onClick={this.confirmDelete}>Yes</button>{' '}
+                <button onClick={this.cancelDelete}>No</button>
+              </span>
+            </div>
+          }
+        />
         {this.renderQuotes()}
       </div>
     );

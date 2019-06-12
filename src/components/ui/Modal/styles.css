@@ -10,6 +10,7 @@
   box-shadow: $uiBoxShadowDark;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  text-align: center;
 
   button {
     display: block;

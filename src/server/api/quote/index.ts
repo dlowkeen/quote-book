@@ -1,5 +1,4 @@
 import * as express from 'express';
-import * as mongoose from 'mongoose';
 import { IQuote, User } from '../../../models';
 
 export async function submit(req: express.Request, res: express.Response) {
@@ -26,10 +25,16 @@ export async function get(req: express.Request, res: express.Response) {
   const doc = await User.findOne({ user });
   if (doc) {
     if (parseInt(qty, 0) === 1) {
-      const totalQuotes = doc.quotes.length;
+      const availableQuotes: any = [];
+      doc.quotes.forEach(x => {
+        if (x.status === 'active') {
+          availableQuotes.push(x);
+        }
+      });
+      const totalQuotes = availableQuotes.length;
       const random = Math.floor(Math.random() * totalQuotes);
       res.status(200).send({
-        quotes: doc.quotes[random] ? [doc.quotes[random]] : null,
+        quotes: availableQuotes[random] ? [availableQuotes[random]] : null,
         succes: true,
       });
     } else {
