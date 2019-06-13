@@ -4,9 +4,6 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import redux, { bindActionCreators } from 'redux';
 import { userActions } from '../../actions';
-import Footer from '../common/Footer';
-import Header from '../common/Header';
-import Spacer from '../common/Spacer';
 import * as styles from '../styles.css';
 
 interface IQuoteProps {
@@ -14,11 +11,6 @@ interface IQuoteProps {
   user: any;
   userActions: any;
   loadingUser: boolean;
-  match: {
-    params: {
-      id: string;
-    };
-  };
 }
 
 interface IQuoteState {
@@ -50,14 +42,11 @@ class Quote extends React.Component<IQuoteProps, IQuoteState> {
   };
 
   render() {
-    const { showError, error } = this.state;
-    const { user } = this.props;
     if (this.props && this.props.user && this.props.user.user === '') {
       return <Redirect to='/' />;
     }
     return (
       <div className={styles.center}>
-        <Header />
         <div>
           <textarea
             className={`${styles.inputfield} ${styles.inputfieldtextarea}`}
@@ -80,8 +69,6 @@ class Quote extends React.Component<IQuoteProps, IQuoteState> {
         <button className={styles.submitbtn} onClick={this.onClick}>
           Add Quote
         </button>
-        <Spacer />
-        <Footer />
       </div>
     );
   }

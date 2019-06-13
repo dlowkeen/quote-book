@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import redux, { bindActionCreators } from 'redux';
 import { quoteActions } from '../../actions';
+import Quote from '../Quote';
 import * as styles from '../styles.css';
 import { Modal } from '../ui/Modal';
 
@@ -20,6 +21,7 @@ interface IQuoteBookProps {
 }
 
 interface IQuoteBookState {
+  add: boolean;
   quotes: any;
   error: string;
   showError: boolean;
@@ -30,6 +32,7 @@ interface IQuoteBookState {
 }
 class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
   state = {
+    add: false,
     quotes: [],
     error: '',
     showError: false,
@@ -60,8 +63,14 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
     this.setState({ open: false });
     this.props.quoteActions.fetchQuotes(this.props.user.user, 'all');
   };
-  cancelDelete = () => {
+  handleCancel = () => {
     this.setState({ open: false });
+  };
+  handleAddClick = (ev: any) => {
+    this.setState({
+      open: true,
+      add: true,
+    });
   };
   renderQuotes = () => {
     const { quotes } = this.props.quotes;
@@ -116,6 +125,7 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
     return (
       <div className={styles.container}>
         <h1 className={styles.center}>Quotes</h1>
+        <button onClick={this.handleAddClick}>Add Quote</button>
         <span onClick={this.renderSwitch}>
           {this.state.showAll ? 'View Random Quote' : 'View All Quotes'}
         </span>
@@ -123,13 +133,19 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
         <Modal
           open={this.state.open}
           children={
-            <div>
-              Are you sure you want to delete this quote?
-              <span>
-                <button onClick={this.confirmDelete}>Yes</button>{' '}
-                <button onClick={this.cancelDelete}>No</button>
-              </span>
-            </div>
+            this.state.add ? (
+              <div>
+                <Quote errorMsg={''} loadingUser={false} />
+              </div>
+            ) : (
+              <div>
+                Are you sure you want to delete this quote?
+                <span>
+                  <button onClick={this.confirmDelete}>Yes</button>{' '}
+                  <button onClick={this.handleCancel}>No</button>
+                </span>
+              </div>
+            )
           }
         />
         {this.renderQuotes()}
