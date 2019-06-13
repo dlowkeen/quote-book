@@ -1,5 +1,4 @@
 import * as express from 'express';
-import * as mongoose from 'mongoose';
 import * as mailJet from 'node-mailjet';
 import * as config from '../../../config';
 import { User } from '../../../models';

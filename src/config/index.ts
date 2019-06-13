@@ -1,4 +1,5 @@
 import { resolve } from 'path';
+import * as devKeys from './devKeys';
 
 export const WEBPACK_OUTPUT_DIR = resolve(__dirname, '../../dist');
 export const IMAGES_DIR = resolve(__dirname, '../../public');
@@ -8,15 +9,20 @@ export const IMAGES_DIR = resolve(__dirname, '../../public');
 // Constants that must be made avaliable client side are
 // attached to the redux state using the function in './process.ts'
 export const PORT = process.env.PORT || 8080;
-export const API = {
-  uri:
-    process.env.API_URL ||
-    'https://currencysimpleapi-integration.azurewebsites.net/',
-};
 
 export const mailJet = {
-  apiKeyPrivate: '67859e5295026552d70f866e16d5db36', // process.env.MJ_APIKEY_PRIVATE || "NA",
-  apiKeyPublic: 'e4d5e9c0574389cbebedcd53e7171def', //  process.env.MJ_APIKEY_PUBLIC || "NA"
+  apiKeyPrivate:
+    process.env.NODE_ENV === 'production'
+      ? process.env.MJ_APIKEY_PRIVATE
+      : devKeys && devKeys.mailJet
+      ? devKeys.mailJet.apiKeyPrivate
+      : 'NA',
+  apiKeyPublic:
+    process.env.NODE_ENV === 'production'
+      ? process.env.MJ_APIKEY_PUBLIC
+      : devKeys && devKeys.mailJet
+      ? devKeys.mailJet.apiKeyPublic
+      : 'NA',
 };
 
 export const mongo = {
