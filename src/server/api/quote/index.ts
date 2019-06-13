@@ -2,11 +2,11 @@ import * as express from 'express';
 import { IQuote, User } from '../../../models';
 
 export async function submit(req: express.Request, res: express.Response) {
-  const { author, quote, user } = req.body;
+  const { targetAuthor, targetQuote, user } = req.body;
   const addQuote: IQuote = {
-    author,
+    author: targetAuthor,
     createdOn: new Date(),
-    quote,
+    quote: targetQuote,
     status: 'active',
   };
   const doc = await User.findOne({ user });

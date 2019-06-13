@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -72,6 +73,27 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
       add: true,
     });
   };
+  handleChange = (event: any) => {
+    this.setState({ [event.target.name]: event.target.value });
+    console.log('this.state', this.state);
+  };
+  onClick = async () => {
+    const { targetQuote, targetAuthor } = this.state;
+    const data = {
+      targetAuthor,
+      targetQuote,
+      user: this.props.user.user,
+    };
+    const blah = await axios.post(`/api/quote`, data);
+    console.log('blah', blah);
+    this.setState({
+      targetAuthor: '',
+      targetQuote: '',
+      add: false,
+      open: false,
+    });
+    this.props.quoteActions.fetchQuotes(this.props.user.user, 'all');
+  };
   renderQuotes = () => {
     const { quotes } = this.props.quotes;
     if (quotes && quotes.length > 0) {
@@ -135,7 +157,12 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
           children={
             this.state.add ? (
               <div>
-                <Quote errorMsg={''} loadingUser={false} />
+                <Quote
+                  targetAuthor={this.state.targetAuthor}
+                  targetQuote={this.state.targetQuote}
+                  handleChange={this.handleChange}
+                  onClick={this.onClick}
+                />
               </div>
             ) : (
               <div>
