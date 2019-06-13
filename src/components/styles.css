@@ -21,8 +21,21 @@
   height: 45px;
   font-size: 2rem;
   margin-top: 3vh;
+  padding: 1rem 1rem 1rem 1rem;
   background-color: #838de9;
   border-color: #838de9;
+  border-radius: 0;
+  color: white;
+}
+
+.cancelbtn {
+  width: 28rem;
+  height: 45px;
+  font-size: 2rem;
+  margin-top: 3vh;
+  padding: 1rem 1rem 1rem 1rem;
+  background-color: #5fdbd2;
+  border-color: #5fdbd2;
   border-radius: 0;
   color: white;
 }

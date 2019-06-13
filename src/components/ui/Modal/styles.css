@@ -14,7 +14,7 @@
 
   button {
     display: block;
-    margin: 0 auto;
+    margin: 5px auto;
   }
 
   /* TODO -- don't love this, but the close buttons currently reside in the parent template, so don't have access to the modal css modules -- would probably be better to move the open/close logic into the Modal component itself. */

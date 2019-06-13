@@ -65,7 +65,12 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
     this.props.quoteActions.fetchQuotes(this.props.user.user, 'all');
   };
   handleCancel = () => {
-    this.setState({ open: false });
+    this.setState({
+      open: false,
+      add: false,
+      targetAuthor: '',
+      targetQuote: '',
+    });
   };
   handleAddClick = (ev: any) => {
     this.setState({
@@ -75,7 +80,6 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
   };
   handleChange = (event: any) => {
     this.setState({ [event.target.name]: event.target.value });
-    console.log('this.state', this.state);
   };
   onClick = async () => {
     const { targetQuote, targetAuthor } = this.state;
@@ -84,8 +88,7 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
       targetQuote,
       user: this.props.user.user,
     };
-    const blah = await axios.post(`/api/quote`, data);
-    console.log('blah', blah);
+    await axios.post(`/api/quote`, data);
     this.setState({
       targetAuthor: '',
       targetQuote: '',
@@ -149,7 +152,11 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
         <h1 className={styles.center}>Quotes</h1>
         <button onClick={this.handleAddClick}>Add Quote</button>
         <span onClick={this.renderSwitch}>
-          {this.state.showAll ? 'View Random Quote' : 'View All Quotes'}
+          {this.state.showAll ? (
+            <button>View Random Quote</button>
+          ) : (
+            <button>View All Quotes</button>
+          )}
         </span>
         <br />
         <Modal
@@ -162,14 +169,25 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
                   targetQuote={this.state.targetQuote}
                   handleChange={this.handleChange}
                   onClick={this.onClick}
+                  onCancel={this.handleCancel}
                 />
               </div>
             ) : (
               <div>
                 Are you sure you want to delete this quote?
                 <span>
-                  <button onClick={this.confirmDelete}>Yes</button>{' '}
-                  <button onClick={this.handleCancel}>No</button>
+                  <button
+                    className={styles.submitbtn}
+                    onClick={this.confirmDelete}
+                  >
+                    Yes
+                  </button>
+                  <button
+                    className={styles.cancelbtn}
+                    onClick={this.handleCancel}
+                  >
+                    No
+                  </button>
                 </span>
               </div>
             )

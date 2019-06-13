@@ -5,6 +5,7 @@ interface IQuoteProps {
   handleChange: any;
   targetAuthor: string;
   targetQuote: string;
+  onCancel: any;
   onClick: any;
 }
 
@@ -30,9 +31,14 @@ const Quote: React.FunctionComponent<IQuoteProps> = props => {
           onChange={props.handleChange}
         />
       </div>
-      <button className={styles.submitbtn} onClick={props.onClick}>
-        Add Quote
-      </button>
+      <div>
+        <button className={styles.submitbtn} onClick={props.onClick}>
+          Add Quote
+        </button>
+        <button className={styles.cancelbtn} onClick={props.onCancel}>
+          Cancel
+        </button>
+      </div>
     </div>
   );
 };
