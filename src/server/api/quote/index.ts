@@ -1,11 +1,13 @@
 import * as express from 'express';
 import { IQuote, User } from '../../../models';
+import * as helpers from '../../../utils';
 
 export async function submit(req: express.Request, res: express.Response) {
   const { targetAuthor, targetQuote, user } = req.body;
   const addQuote: IQuote = {
     author: targetAuthor,
     createdOn: new Date(),
+    id: helpers.generateId(),
     quote: targetQuote,
     status: 'active',
   };
@@ -17,6 +19,29 @@ export async function submit(req: express.Request, res: express.Response) {
   } else {
     console.log('shouldnt have gotten here...');
     res.status(500).send({ success: false });
+  }
+}
+
+export async function edit(req: express.Request, res: express.Response) {
+  try {
+    const { targetAuthor, targetId, targetQuote, user } = req.body;
+    const updated = await User.findOneAndUpdate(
+      { user, 'quotes.id': targetId },
+      {
+        $set: {
+          'quotes.$.quote': targetQuote,
+          'quotes.$.author': targetAuthor,
+        },
+      },
+    );
+    if (updated) {
+      return res.status(200).send({ quotes: updated.quotes, succes: true });
+    } else {
+      return res.status(500).send({ success: false });
+    }
+  } catch (e) {
+    console.log('err', e);
+    return res.status(500).send({ success: false, error: e });
   }
 }
 

@@ -33,7 +33,7 @@ const Quote: React.FunctionComponent<IQuoteProps> = props => {
       </div>
       <div>
         <button className={styles.submitbtn} onClick={props.onClick}>
-          Add Quote
+          Submit
         </button>
         <button className={styles.cancelbtn} onClick={props.onCancel}>
           Cancel

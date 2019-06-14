@@ -14,19 +14,16 @@ interface IQuoteBookProps {
   quotes: any;
   quoteActions: any;
   loadingUser: boolean;
-  match: {
-    params: {
-      id: string;
-    };
-  };
 }
 
 interface IQuoteBookState {
   add: boolean;
+  edit: boolean;
   quotes: any;
   error: string;
   showError: boolean;
   showAll: boolean;
+  targetId: string;
   targetAuthor: string;
   targetQuote: string;
   open: boolean;
@@ -34,10 +31,12 @@ interface IQuoteBookState {
 class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
   state = {
     add: false,
+    edit: false,
     quotes: [],
     error: '',
     showError: false,
     showAll: true,
+    targetId: '',
     targetAuthor: '',
     targetQuote: '',
     open: false,
@@ -64,9 +63,19 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
     this.setState({ open: false });
     this.props.quoteActions.fetchQuotes(this.props.user.user, 'all');
   };
+  handleEditClick = (ev: any) => {
+    this.setState({
+      open: true,
+      edit: true,
+      targetId: ev.currentTarget.dataset.id,
+      targetAuthor: ev.currentTarget.dataset.author,
+      targetQuote: ev.currentTarget.dataset.quote,
+    });
+  };
   handleCancel = () => {
     this.setState({
       open: false,
+      edit: false,
       add: false,
       targetAuthor: '',
       targetQuote: '',
@@ -82,17 +91,24 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
     this.setState({ [event.target.name]: event.target.value });
   };
   onClick = async () => {
-    const { targetQuote, targetAuthor } = this.state;
+    const { add, edit, targetAuthor, targetId, targetQuote } = this.state;
     const data = {
       targetAuthor,
+      targetId,
       targetQuote,
       user: this.props.user.user,
     };
-    await axios.post(`/api/quote`, data);
+    if (add) {
+      await axios.post(`/api/quote`, data);
+    } else if (edit) {
+      await axios.put(`/api/quote/edit`, data);
+    }
     this.setState({
       targetAuthor: '',
+      targetId: '',
       targetQuote: '',
       add: false,
+      edit: false,
       open: false,
     });
     this.props.quoteActions.fetchQuotes(this.props.user.user, 'all');
@@ -113,7 +129,14 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
                   >
                     Delete
                   </button>
-                  {/* <p>Edit</p> */}
+                  <button
+                    data-author={x.author}
+                    data-id={x.id}
+                    data-quote={x.quote}
+                    onClick={this.handleEditClick}
+                  >
+                    Edit
+                  </button>
                 </div>
                 <div>
                   <h3>"{x.quote}"</h3>
@@ -162,7 +185,7 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
         <Modal
           open={this.state.open}
           children={
-            this.state.add ? (
+            this.state.add || this.state.edit ? (
               <div>
                 <Quote
                   targetAuthor={this.state.targetAuthor}

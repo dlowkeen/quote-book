@@ -2,9 +2,10 @@ import { Document, Model, model, Schema } from 'mongoose';
 
 export interface IQuote {
   author: string;
+  createdOn: Date;
+  id: string;
   quote: string;
   status: string;
-  createdOn: Date;
 }
 
 export interface IUserModel extends Document {
