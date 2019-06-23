@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import redux, { bindActionCreators } from 'redux';
 import { quoteActions } from '../../actions';
+import Pagination from '../common/Pagination';
 import Quote from '../Quote';
 import * as styles from '../styles.css';
 import { Modal } from '../ui/Modal';
@@ -27,6 +28,9 @@ interface IQuoteBookState {
   targetAuthor: string;
   targetQuote: string;
   open: boolean;
+  quotesPerPage: number;
+  currentQuotes: any;
+  currentPage: number;
 }
 class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
   state = {
@@ -40,6 +44,9 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
     targetAuthor: '',
     targetQuote: '',
     open: false,
+    quotesPerPage: 2,
+    currentQuotes: [],
+    currentPage: 1,
   };
   componentDidMount() {
     const { showAll } = this.state;
@@ -52,6 +59,15 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
       targetAuthor: ev.currentTarget.dataset.author,
       targetQuote: ev.currentTarget.dataset.quote,
     });
+  };
+  onPageForward = () => {
+    this.setState({ currentPage: this.state.currentPage + 1 });
+  };
+  onPageBack = () => {
+    this.setState({ currentPage: this.state.currentPage - 1 });
+  };
+  selectPage = (ev: any) => {
+    this.setState({ currentPage: ev.target.value });
   };
   confirmDelete = () => {
     const payload = {
@@ -167,7 +183,10 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
     }
   };
   render() {
-    if (this.props && this.props.user && this.props.user.user === '') {
+    console.log('this.state', this.state.currentPage);
+    console.log('this.props', this.props);
+    const { user, quotes } = this.props;
+    if (user && user.user === '') {
       return <Redirect to='/' />;
     }
     return (
@@ -217,6 +236,17 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
           }
         />
         {this.renderQuotes()}
+        <Pagination
+          currentPage={this.state.currentPage}
+          totalPages={
+            this.props.quotes && this.props.quotes.quotes
+              ? this.props.quotes.quotes.length / this.state.quotesPerPage
+              : 0
+          }
+          selectPage={this.selectPage}
+          onPageBack={this.onPageBack}
+          onPageForward={this.onPageForward}
+        />
       </div>
     );
   }
