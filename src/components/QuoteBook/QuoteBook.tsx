@@ -45,7 +45,7 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
     targetAuthor: '',
     targetQuote: '',
     open: false,
-    quotesPerPage: 3,
+    quotesPerPage: 5,
     currentQuotes: [],
     currentPage: 1,
   };
