@@ -44,7 +44,7 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
     targetAuthor: '',
     targetQuote: '',
     open: false,
-    quotesPerPage: 2,
+    quotesPerPage: 3,
     currentQuotes: [],
     currentPage: 1,
   };
@@ -61,13 +61,20 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
     });
   };
   onPageForward = () => {
-    this.setState({ currentPage: this.state.currentPage + 1 });
+    if (
+      this.state.currentPage <
+      this.props.quotes.quotes.length / this.state.quotesPerPage
+    ) {
+      this.setState({ currentPage: this.state.currentPage + 1 });
+    }
   };
   onPageBack = () => {
-    this.setState({ currentPage: this.state.currentPage - 1 });
+    if (this.state.currentPage > 1) {
+      this.setState({ currentPage: this.state.currentPage - 1 });
+    }
   };
   selectPage = (ev: any) => {
-    this.setState({ currentPage: ev.target.value });
+    this.setState({ currentPage: parseInt(ev.target.value, 0) });
   };
   confirmDelete = () => {
     const payload = {
@@ -130,12 +137,14 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
     this.props.quoteActions.fetchQuotes(this.props.user.user, 'all');
   };
   renderQuotes = () => {
+    const { currentPage, quotesPerPage } = this.state;
     const { quotes } = this.props.quotes;
     if (quotes && quotes.length > 0) {
       const displayed = quotes.map((x: any) => {
         if (x.status === 'active') {
+          // console.log('key', x.id);
           return (
-            <div key={x.quote}>
+            <div key={x.id}>
               <div className={styles.card}>
                 <div className={styles.above}>
                   <button
@@ -164,9 +173,16 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
               <br />
             </div>
           );
+        } else {
+          console.log('deleted');
         }
       });
-      return displayed;
+      // console.log('displayed', displayed);
+      // console.log('displayed sliced', displayed.slice(((currentPage - 1) * quotesPerPage), ((currentPage) * quotesPerPage)));
+      return displayed.slice(
+        (currentPage - 1) * quotesPerPage,
+        currentPage * quotesPerPage,
+      );
     } else {
       return <h2>You need to add some quotes first!</h2>;
     }
@@ -183,9 +199,9 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
     }
   };
   render() {
+    const { user, quotes } = this.props;
     console.log('this.state', this.state.currentPage);
     console.log('this.props', this.props);
-    const { user, quotes } = this.props;
     if (user && user.user === '') {
       return <Redirect to='/' />;
     }
