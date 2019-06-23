@@ -12,7 +12,12 @@ const renderPages = (props: any) => {
   const pageNums = [];
   for (let i = 0; i < props.totalPages; i++) {
     pageNums.push(
-      <input type='submit' onClick={props.selectPage} value={i + 1} />,
+      <input
+        key={i + 1}
+        type='submit'
+        onClick={props.selectPage}
+        value={i + 1}
+      />,
     );
   }
   return pageNums;

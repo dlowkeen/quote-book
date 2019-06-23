@@ -49,21 +49,21 @@ export async function get(req: express.Request, res: express.Response) {
   const { qty, user } = req.query;
   const doc = await User.findOne({ user });
   if (doc) {
+    const availableQuotes: any = [];
+    doc.quotes.forEach(x => {
+      if (x.status === 'active') {
+        availableQuotes.push(x);
+      }
+    });
+    const totalQuotes = availableQuotes.length;
+    const random = Math.floor(Math.random() * totalQuotes);
     if (parseInt(qty, 0) === 1) {
-      const availableQuotes: any = [];
-      doc.quotes.forEach(x => {
-        if (x.status === 'active') {
-          availableQuotes.push(x);
-        }
-      });
-      const totalQuotes = availableQuotes.length;
-      const random = Math.floor(Math.random() * totalQuotes);
       res.status(200).send({
         quotes: availableQuotes[random] ? [availableQuotes[random]] : null,
         succes: true,
       });
     } else {
-      res.status(200).send({ quotes: doc.quotes, succes: true });
+      res.status(200).send({ quotes: availableQuotes, succes: true });
     }
   } else {
     console.log('shouldnt have gotten here...');

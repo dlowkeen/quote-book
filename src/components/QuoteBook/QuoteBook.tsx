@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import redux, { bindActionCreators } from 'redux';
 import { quoteActions } from '../../actions';
+import AddQuote from '../AddQuote';
 import Pagination from '../common/Pagination';
-import Quote from '../Quote';
+import Quote from '../common/Quote';
 import * as styles from '../styles.css';
 import { Modal } from '../ui/Modal';
 
@@ -140,45 +141,20 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
     const { currentPage, quotesPerPage } = this.state;
     const { quotes } = this.props.quotes;
     if (quotes && quotes.length > 0) {
-      const displayed = quotes.map((x: any) => {
+      const displayed: any = quotes.map((x: any) => {
         if (x.status === 'active') {
-          // console.log('key', x.id);
           return (
-            <div key={x.id}>
-              <div className={styles.card}>
-                <div className={styles.above}>
-                  <button
-                    data-author={x.author}
-                    data-quote={x.quote}
-                    onClick={this.handleDeleteClick}
-                  >
-                    Delete
-                  </button>
-                  <button
-                    data-author={x.author}
-                    data-id={x.id}
-                    data-quote={x.quote}
-                    onClick={this.handleEditClick}
-                  >
-                    Edit
-                  </button>
-                </div>
-                <div>
-                  <h3>"{x.quote}"</h3>
-                  <p>
-                    Author: {x.author || x.author === '' ? x.author : 'unknown'}
-                  </p>
-                </div>
-              </div>
-              <br />
-            </div>
+            <Quote
+              key={x.id}
+              id={x.id}
+              author={x.author}
+              quote={x.quote}
+              handleDeleteClick={this.handleDeleteClick}
+              handleEditClick={this.handleEditClick}
+            />
           );
-        } else {
-          console.log('deleted');
         }
       });
-      // console.log('displayed', displayed);
-      // console.log('displayed sliced', displayed.slice(((currentPage - 1) * quotesPerPage), ((currentPage) * quotesPerPage)));
       return displayed.slice(
         (currentPage - 1) * quotesPerPage,
         currentPage * quotesPerPage,
@@ -200,8 +176,6 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
   };
   render() {
     const { user, quotes } = this.props;
-    console.log('this.state', this.state.currentPage);
-    console.log('this.props', this.props);
     if (user && user.user === '') {
       return <Redirect to='/' />;
     }
@@ -222,7 +196,7 @@ class QuoteBook extends React.Component<IQuoteBookProps, IQuoteBookState> {
           children={
             this.state.add || this.state.edit ? (
               <div>
-                <Quote
+                <AddQuote
                   targetAuthor={this.state.targetAuthor}
                   targetQuote={this.state.targetQuote}
                   handleChange={this.handleChange}

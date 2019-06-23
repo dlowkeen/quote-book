@@ -9,7 +9,7 @@ interface IQuoteProps {
   onClick: any;
 }
 
-const Quote: React.FunctionComponent<IQuoteProps> = props => {
+const AddQuote: React.FunctionComponent<IQuoteProps> = props => {
   return (
     <div className={styles.center}>
       <div>
@@ -43,4 +43,4 @@ const Quote: React.FunctionComponent<IQuoteProps> = props => {
   );
 };
 
-export default Quote;
+export default AddQuote;
