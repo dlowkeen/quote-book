@@ -11,12 +11,18 @@ const mailjet = mailJet.connect(
 export async function send(req: express.Request, res: express.Response) {
   const { action, email, password } = req.body;
   const cleanedEmail = email.toLowerCase();
-  const doc = await User.findOne({ user: cleanedEmail, password });
-  console.log('doc', doc);
+  const doc = await User.findOne({ user: cleanedEmail });
   if (action === 'login') {
     if (doc) {
-      // cool update state
-      res.status(200).send({ email, success: true });
+      if (doc.password === password) {
+        // cool update state
+        res.status(200).send({ email, success: true });
+      } else {
+        res.status(500).send({
+          message: 'Incorrect Password',
+          success: false,
+        });
+      }
     } else {
       // return error: You need to sign up first
       res.status(500).send({

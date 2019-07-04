@@ -139,7 +139,7 @@ module.exports = env => {
         // so it is ignored by express.static.
         // However, webpack dev server prefers 'index.html'
         filename: env.development ? 'index.html' : 'generated.html',
-        title: 'TITLE',
+        title: 'SimpleQuoteBook',
         meta: [
           // viewport meta tag for responsiveness / media queries
           {
