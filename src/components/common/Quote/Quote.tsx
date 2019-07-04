@@ -31,10 +31,9 @@ export const Quote: React.FunctionComponent<IQuoteProps> = props => {
           </button>
         </div>
         <div>
-          <h3>"{props.quote}"</h3>
-          <p>
-            Author:{' '}
-            {props.author || props.author === '' ? props.author : 'unknown'}
+          <h3 className={styles.quote}>"{props.quote}"</h3>
+          <p className={styles.author}>
+            ~ {props.author || props.author === '' ? props.author : 'unknown'}
           </p>
         </div>
       </div>

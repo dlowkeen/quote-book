@@ -64,3 +64,14 @@
   z-index: 2;
   float: right;
 }
+
+.quote {
+  font-family: 'Cabin Condensed', sans-serif;
+  font-size: 36px;
+}
+
+.author {
+  font-family: 'Cabin Condensed', sans-serif;
+  font-size: 22px;
+  text-align: center;
+}

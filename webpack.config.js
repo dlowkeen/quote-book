@@ -150,6 +150,7 @@ module.exports = env => {
         // Including:
         // Font Awesome CSS so svgs are styled correctly on server render
         headHtmlSnippet: `
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cabin+Condensed&display=swap" >
           <style>
             ${dom.css().replace(/\s/g, '')}  // font-awesome css
           </style>`,
