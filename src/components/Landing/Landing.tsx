@@ -28,6 +28,7 @@ const Landing: React.FunctionComponent = () => {
       <Spacer />
       <Spacer />
       <Spacer />
+      <h1>Hi Sean</h1>
       <br />
       <Footer />
     </div>
