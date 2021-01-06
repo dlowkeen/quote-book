@@ -46,7 +46,7 @@
     "@types/redux-logger": "3.0.6",
     "@types/request-promise": "^4.1.42",
     "@types/webpack-env": "1.13.6",
-    "axios": ">=0.18.1",
+    "axios": ">=0.21.1",
     "bluebird": "^3.5.3",
     "body-parser": "1.18.3",
     "cors": "2.8.4",
